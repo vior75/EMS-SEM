@@ -56,6 +56,6 @@
             </tr>
         </table>
         <input class="btn col-md-2" style="float: right;background-color:#2763C6; color:white; border-radius:25px"
-            type="submit" onclick="return confirm('Confirm to update profile?')" value="Edit Profile">
+            type="submit" onclick="return confirm('Confirm to update profile?')" value="Edits Profile">
     </form>
 @endsection
