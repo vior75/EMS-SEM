@@ -8,30 +8,38 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //Display user profile page
-    public function profile()
-    {
-        $user = User::find(auth()->user()->id);
+    // Display user profile page
+public function profile()
+{
+    $user = User::find(auth()->user()->id);
 
-        return view('manageUserProfile.profile-view', compact('user'));
-    }
+    return view('manageUserProfile.profile-view', compact('user'));
+}
 
-    //To update the edited user profile 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'email' => 'required|email|unique:users,email,',
-            'name' => 'required|string',
-        ],
-        [
-            'email.unique' => 'The email has been registered',
-            'name.required' => 'The name cannot be empty'
-        ]
-    );
+// To update the edited user profile
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'email' => 'required|email|unique:users,email,' . $id,
+        'name' => 'required|string|max:255',
+        'phone' => 'required|digits_between:10,15',
+        'address' => 'required|string|max:255',
+    ], [
+        'address.required' => 'The address field is required.',
+    ]);
 
-        User::find($id)->update($request->all());
+    $user = User::findOrFail($id);
 
-        return back()->with('success', 'Profile updated successfully.');
-    }
+    $user->update([
+        'email' => $request->input('email'),
+        'name' => $request->input('name'),
+        'phone' => $request->input('phone'),
+        'address' => $request->input('address'),
+    ]);
+
+    return back()->with('success', 'Profile updated successfully.');
+}
+
 
     //Below are functions for staff to manage user profile
 

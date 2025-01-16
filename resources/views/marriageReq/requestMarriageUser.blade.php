@@ -35,7 +35,7 @@
                                     <tr>
                                         <td>1</td>
                                         <td>890930065551
-                                            SITI BINTI ABU BAKAR</td>
+                                            SITIS BINTI ABU BAKAR</td>
                                         <td>KTN1M4/2022-00011</td>
                                         <td>15/12/2022</td>
                                         <td>BELUM HANTAR</td>
