@@ -6,7 +6,6 @@
     @endif
     <form action="{{ route('user.update', auth()->user()->id) }}" method="post">
 
-
         @csrf
         @method('PUT')
         <div class="row mt-4" style="background-color: #cbdcf7;">
@@ -30,7 +29,7 @@
                         </div>
                     @enderror
                 </td>
-
+            </tr>
             <tr>
                 <th>Gender</th>
                 <td>:</td>
@@ -39,7 +38,15 @@
             <tr>
                 <th>Phone Number</th>
                 <td>*:</td>
-                <td>{{ auth()->user()->phone }}</td>
+                <td>
+                    <input class="form-control @error('phone') is-invalid @enderror" type="text" name="phone"
+                        id="phone" value="{{ auth()->user()->phone }}">
+                    @error('phone')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -54,8 +61,21 @@
                     @enderror
                 </td>
             </tr>
+            <tr>
+                <th>Address</th>
+                <td>*:</td>
+                <td>
+                    <textarea class="form-control @error('address') is-invalid @enderror" name="address"
+                        id="address" rows="3">{{ auth()->user()->address }}</textarea>
+                    @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </td>
+            </tr>
         </table>
         <input class="btn col-md-2" style="float: right;background-color:#2763C6; color:white; border-radius:25px"
-            type="submit" onclick="return confirm('Confirm to update profile?')" value="Edits Profile">
+            type="submit" onclick="return confirm('Confirm to update profile?')" value="Edit Profile">
     </form>
 @endsection
